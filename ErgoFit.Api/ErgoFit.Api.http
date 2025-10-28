@@ -1,0 +1,6 @@
+@ErgoFit.Api_HostAddress = http://localhost:5056
+
+GET {{ErgoFit.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
