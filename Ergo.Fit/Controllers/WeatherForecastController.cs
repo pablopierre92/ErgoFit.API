@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ErgoFit.Api.Controllers
+namespace Ergo.Fit.Controllers
 {
     [ApiController]
     [Route("[controller]")]

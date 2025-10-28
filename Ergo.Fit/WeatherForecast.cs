@@ -1,4 +1,4 @@
-namespace ErgoFit.Api
+namespace Ergo.Fit
 {
     public class WeatherForecast
     {
