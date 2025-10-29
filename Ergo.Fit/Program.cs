@@ -18,7 +18,7 @@ if (app.Environment.IsDevelopment())
     // OpenAPI endpoint (JSON)
     app.MapOpenApi();
 
-    // Swagger UI (interface visual) ← ISSO QUE ESTAVA FALTANDO!
+    // Swagger UI (interface visual)
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
