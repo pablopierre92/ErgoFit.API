@@ -1,5 +1,10 @@
-﻿using Ergo.Fit.DataContext;
+﻿using Ergo.Fit.Configuration;
+using Ergo.Fit.DataContext;
+using Ergo.Fit.Service.DepartamentoService;
+using Ergo.Fit.Service.EmpresaService;
+using Ergo.Fit.Service.FuncionarioService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,10 +18,16 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IFuncionarioInterface, FuncionarioService>();
+builder.Services.AddScoped<IEmpresaInterface, EmpresaService>();
+builder.Services.AddScoped<IDepartamentoInterface, DepartamentoService>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddIdentityConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
