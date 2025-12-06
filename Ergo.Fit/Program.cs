@@ -13,8 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Controllers
 builder.Services.AddControllers();
 
-// OpenAPI e Swagger
-builder.Services.AddOpenApi();
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -95,11 +94,10 @@ using (var scope = app.Services.CreateScope())
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI(options =>
+    app.UseSwaggerUI(c =>
     {
-        options.SwaggerEndpoint("/openapi/v1.json", "ErgoFit API v1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ErgoFit API v1");
     });
 }
 
