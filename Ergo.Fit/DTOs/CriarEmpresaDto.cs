@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Ergo.Fit.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ergo.Fit.DTOs
 {
@@ -11,6 +12,7 @@ namespace Ergo.Fit.DTOs
 
         [Required(ErrorMessage = "CNPJ é obrigatório")]
         [StringLength(14, MinimumLength = 14, ErrorMessage = "CNPJ deve ter 14 dígitos")]
+        [CnpjValidator]
         public string Cnpj { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Email é obrigatório")]

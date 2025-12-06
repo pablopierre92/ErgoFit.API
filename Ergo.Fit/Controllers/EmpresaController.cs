@@ -8,6 +8,7 @@ namespace Ergo.Fit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmpresaController : ControllerBase
     {
         private readonly IEmpresaInterface _empresaInterface;

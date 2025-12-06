@@ -21,10 +21,6 @@ namespace Ergo.Fit.Models
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(255)]
-        public string Senha { get; set; } = string.Empty;
-
         public DateTime? DataVencimento { get; set; }
 
         public bool Ativo { get; set; } = true;
@@ -33,12 +29,18 @@ namespace Ergo.Fit.Models
 
         public DateTime? DataAtualizacao { get; set; }
 
-        // Foreign Key
+        // Foreign Keys
         public int? CriadoPorUsuarioMasterId { get; set; }
+
+        [StringLength(450)]
+        public string? ApplicationUserId { get; set; }
 
         // Relacionamentos
         [ForeignKey("CriadoPorUsuarioMasterId")]
         public virtual UsuarioMasterModel? CriadoPorUsuarioMaster { get; set; }
+
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser? ApplicationUser { get; set; }
 
         public virtual ICollection<FuncionarioModel> Funcionarios { get; set; } = new List<FuncionarioModel>();
         public virtual ICollection<DepartamentoModel> Departamentos { get; set; } = new List<DepartamentoModel>();

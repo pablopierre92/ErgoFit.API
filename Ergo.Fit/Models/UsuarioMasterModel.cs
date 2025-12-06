@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ergo.Fit.Models
 {
@@ -16,15 +17,18 @@ namespace Ergo.Fit.Models
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(255)]
-        public string Senha { get; set; } = string.Empty;
-
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         public bool Ativo { get; set; } = true;
 
+        // Foreign Key
+        [StringLength(450)]
+        public string? ApplicationUserId { get; set; }
+
         // Relacionamentos
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser? ApplicationUser { get; set; }
+
         public virtual ICollection<EmpresaModel> EmpresasCriadas { get; set; } = new List<EmpresaModel>();
 
     }

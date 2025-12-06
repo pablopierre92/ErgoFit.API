@@ -1,12 +1,14 @@
 ﻿using Ergo.Fit.DTOs;
 using Ergo.Fit.Models;
 using Ergo.Fit.Service.FuncionarioService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ergo.Fit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FuncionarioController : ControllerBase
     {
         private readonly IFuncionarioInterface _funcionarioInterface;

@@ -22,10 +22,6 @@ namespace Ergo.Fit.Models
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(255)]
-        public string Senha { get; set; } = string.Empty;
-
-        [Required]
         [StringLength(11)]
         public string Cpf { get; set; } = string.Empty;
 
@@ -46,12 +42,18 @@ namespace Ergo.Fit.Models
 
         public int? IdDepartamento { get; set; }
 
+        [StringLength(450)]
+        public string? ApplicationUserId { get; set; }
+
         // Relacionamentos
         [ForeignKey("IdEmpresa")]
         public virtual EmpresaModel Empresa { get; set; } = null!;
 
         [ForeignKey("IdDepartamento")]
         public virtual DepartamentoModel? Departamento { get; set; }
+
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser? ApplicationUser { get; set; }
 
         public virtual ICollection<SessaoModel> Sessoes { get; set; } = new List<SessaoModel>();
 

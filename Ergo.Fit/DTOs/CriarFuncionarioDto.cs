@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Ergo.Fit.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ergo.Fit.DTOs
 {
@@ -23,6 +24,7 @@ namespace Ergo.Fit.DTOs
 
         [Required]
         [StringLength(11)]
+        [CpfValidator]
         public string Cpf { get; set; } = string.Empty;
 
         [StringLength(20)]
