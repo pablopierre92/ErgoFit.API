@@ -1,8 +1,11 @@
 ﻿using Ergo.Fit.Configuration;
 using Ergo.Fit.DataContext;
+using Ergo.Fit.Service.CategoriaService;
 using Ergo.Fit.Service.DepartamentoService;
 using Ergo.Fit.Service.EmpresaService;
+using Ergo.Fit.Service.ExercicioService;
 using Ergo.Fit.Service.FuncionarioService;
+using Ergo.Fit.Service.SessaoService;
 using Ergo.Fit.Service.TokenService;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,6 +71,9 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFuncionarioInterface, FuncionarioService>();
 builder.Services.AddScoped<IEmpresaInterface, EmpresaService>();
 builder.Services.AddScoped<IDepartamentoInterface, DepartamentoService>();
+builder.Services.AddScoped<ICategoriaInterface, CategoriaService>();
+builder.Services.AddScoped<IExercicioInterface, ExercicioService>();
+builder.Services.AddScoped<ISessaoInterface, SessaoService>();
 
 // CORS (para Angular)
 builder.Services.AddCors(options =>
@@ -83,11 +89,12 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ===== SEED ROLES =====
+// ===== SEED ROLES + DATA =====
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     await RoleSeeder.SeedRolesAsync(services);
+    await DataSeeder.SeedAsync(services);
 }
 
 // ===== CONFIGURE PIPELINE =====
