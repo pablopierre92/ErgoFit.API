@@ -7,6 +7,7 @@
         public string NomeCompleto { get; set; } = string.Empty;
         public List<string> Roles { get; set; } = new();
         public DateTime ExpiresAt { get; set; } = DateTime.UtcNow.AddHours(2);
-
+        public int? EmpresaId { get; set; }
+        public int? FuncionarioId { get; set; }
     }
 }
