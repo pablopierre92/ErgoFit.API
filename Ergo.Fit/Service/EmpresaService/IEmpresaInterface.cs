@@ -1,4 +1,4 @@
-﻿using Ergo.Fit.DTOs;
+using Ergo.Fit.DTOs;
 using Ergo.Fit.Models;
 
 namespace Ergo.Fit.Service.EmpresaService
@@ -7,5 +7,6 @@ namespace Ergo.Fit.Service.EmpresaService
     {
         Task<ServiceResponse<EmpresaModel>> CriarEmpresa(CriarEmpresaDto dto);
         Task<ServiceResponse<List<EmpresaModel>>> GetEmpresas();
+        Task<ServiceResponse<EmpresaModel>> AtualizarEmpresa(int id, AtualizarEmpresaDto dto);
     }
 }

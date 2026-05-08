@@ -138,6 +138,14 @@ namespace Ergo.Fit.Controllers
             return response.Sucesso ? Ok(response) : BadRequest(response);
         }
 
+        [HttpPut("empresas/{id}")]
+        public async Task<IActionResult> AtualizarEmpresa(int id, [FromBody] AtualizarEmpresaDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var response = await _empresaService.AtualizarEmpresa(id, dto);
+            return response.Sucesso ? Ok(response) : BadRequest(response);
+        }
+
         [HttpDelete("empresas/{id}")]
         public async Task<IActionResult> InativarEmpresa(int id)
         {

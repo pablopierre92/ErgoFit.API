@@ -30,5 +30,14 @@ namespace Ergo.Fit.Controllers
             var resultado = await _empresaInterface.CriarEmpresa(dto);
             return Ok(resultado);
         }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Empresa,UsuarioMaster")]
+        public async Task<ActionResult<ServiceResponse<EmpresaModel>>> AtualizarEmpresa(int id, [FromBody] AtualizarEmpresaDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var resultado = await _empresaInterface.AtualizarEmpresa(id, dto);
+            return resultado.Sucesso ? Ok(resultado) : BadRequest(resultado);
+        }
     }
 }

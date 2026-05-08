@@ -108,9 +108,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+// Em produção redireciona para HTTPS; em dev mantém HTTP para evitar bloquear preflight do Angular
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
-app.UseCors("AllowAngular"); //  Adicione CORS antes de Authentication
+app.UseCors("AllowAngular");
 
 app.UseAuthentication(); 
 app.UseAuthorization();

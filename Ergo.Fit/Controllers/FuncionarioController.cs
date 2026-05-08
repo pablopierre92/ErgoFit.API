@@ -69,9 +69,19 @@ namespace Ergo.Fit.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Empresa,UsuarioMaster")]
-        public async Task<ActionResult<ServiceResponse<List<FuncionarioModel>>>> UpdateFuncionario(int id, [FromBody] FuncionarioModel funcionario)
+        public async Task<ActionResult<ServiceResponse<List<FuncionarioModel>>>> UpdateFuncionario(int id, [FromBody] AtualizarFuncionarioDto dto)
         {
-            funcionario.Id = id;
+            var funcionario = new FuncionarioModel
+            {
+                Id = id,
+                Nome = dto.Nome,
+                Sobrenome = dto.Sobrenome,
+                Email = dto.Email,
+                Matricula = dto.Matricula,
+                IdDepartamento = dto.IdDepartamento,
+                DataAdmissao = dto.DataAdmissao,
+                Cpf = string.Empty
+            };
             return Ok(await _funcionarioInterface.UpdateFuncionario(funcionario));
         }
 

@@ -63,29 +63,46 @@ namespace Ergo.Fit.Service.EmpresaService
 
         public async Task<ServiceResponse<List<EmpresaModel>>> GetEmpresas()
         {
-            ServiceResponse<List<EmpresaModel>> serviceResponse = new ServiceResponse<List<EmpresaModel>>();
-
+            var response = new ServiceResponse<List<EmpresaModel>>();
             try
             {
-                serviceResponse.Dados = _context.Empresas.ToList();
-
-                if (serviceResponse.Dados.Count == 0)
-                {
-                    serviceResponse.Mensagem = "Nenhum dado encontrado!";
-                }
-
-
-
+                response.Dados = _context.Empresas.ToList();
+                if (response.Dados.Count == 0)
+                    response.Mensagem = "Nenhum dado encontrado!";
             }
             catch (Exception ex)
             {
-
-                serviceResponse.Mensagem = ex.Message;
-                serviceResponse.Sucesso = false;
-
+                response.Mensagem = ex.Message;
+                response.Sucesso = false;
             }
+            return response;
+        }
 
-            return serviceResponse;
+        public async Task<ServiceResponse<EmpresaModel>> AtualizarEmpresa(int id, AtualizarEmpresaDto dto)
+        {
+            var response = new ServiceResponse<EmpresaModel>();
+            try
+            {
+                var empresa = await _context.Empresas.FindAsync(id);
+                if (empresa == null)
+                {
+                    response.Sucesso = false;
+                    response.Mensagem = "Empresa não encontrada.";
+                    return response;
+                }
+                empresa.Nome = dto.Nome;
+                empresa.Email = dto.Email;
+                empresa.DataVencimento = dto.DataVencimento;
+                empresa.DataAtualizacao = DateTime.Now;
+                await _context.SaveChangesAsync();
+                response.Dados = empresa;
+            }
+            catch (Exception ex)
+            {
+                response.Sucesso = false;
+                response.Mensagem = ex.Message;
+            }
+            return response;
         }
     }
 }
